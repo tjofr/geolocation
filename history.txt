@@ -1,0 +1,2 @@
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:org:create -s -f config/project-scratch-def.json -a GeoAppScratch
+Successfully created scratch org: 00D3E0000009VJoUAM, username: test-o7ksgvznza2a@example.com
