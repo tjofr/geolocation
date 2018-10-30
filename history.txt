@@ -1,2 +1,54 @@
+﻿sfdx force:project:create -n geolocation
+
 F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:org:create -s -f config/project-scratch-def.json -a GeoAppScratch
 Successfully created scratch org: 00D3E0000009VJoUAM, username: test-o7ksgvznza2a@example.com
+
+sfdx force:user:permset:assign -n Geolocation
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:user:permset:assign -n G
+eolocation
+=== Permsets Assigned
+USERNAME                       PERMISSION SET ASSIGNMENT
+─────────────────────────────  ─────────────────────────
+test-o7ksgvznza2a@example.com  Geolocation
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>
+
+sfdx force:source:pull
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:source:pull
+=== Pulled Source
+STATE  FULL NAME                               TYPE           PROJECT PATH
+─────  ──────────────────────────────────────  ─────────────  ──────────────────
+───────────────────────────────────────────────────────────────────
+Add    Account.Location__c                     CustomField    force-app\main\def
+ault\objects\Account\fields\Location__c.field-meta.xml
+Add    Account-Account %28Marketing%29 Layout  Layout         force-app\main\def
+ault\layouts\Account-Account %28Marketing%29 Layout.layout-meta.xml
+Add    Account-Account %28Support%29 Layout    Layout         force-app\main\def
+ault\layouts\Account-Account %28Support%29 Layout.layout-meta.xml
+Add    Account-Account %28Sales%29 Layout      Layout         force-app\main\def
+ault\layouts\Account-Account %28Sales%29 Layout.layout-meta.xml
+Add    Account-Account Layout                  Layout         force-app\main\def
+ault\layouts\Account-Account Layout.layout-meta.xml
+Add    Geolocation                             PermissionSet  force-app\main\def
+ault\permissionsets\Geolocation.permissionset-meta.xml
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>
+
+git init
+git remote add origin https://github.com/tjofr/geolocation.git
+
+git add -A
+git commit -m "Add custom object and permset"
+git push origin master
+
+
+Get data from scratch oirg
+mkdir data
+export account
+sfdx force:data:tree:export -q "SELECT Name, Location__Latitude__s, Location__Longitude__s FROM Account WHERE Location__Latitude__s != NULL AND Location__Longitude__s != NULL" -d ./data
+
+
+Push data to org import account
+sfdx force:data:tree:import --sobjecttreefiles data/Account.json
