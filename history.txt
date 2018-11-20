@@ -5,8 +5,7 @@ Successfully created scratch org: 00D3E0000009VJoUAM, username: test-o7ksgvznza2
 
 sfdx force:user:permset:assign -n Geolocation
 
-F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:user:permset:assign -n G
-eolocation
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:user:permset:assign -n Geolocation
 === Permsets Assigned
 USERNAME                       PERMISSION SET ASSIGNMENT
 ─────────────────────────────  ─────────────────────────
@@ -19,20 +18,13 @@ sfdx force:source:pull
 F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:source:pull
 === Pulled Source
 STATE  FULL NAME                               TYPE           PROJECT PATH
-─────  ──────────────────────────────────────  ─────────────  ──────────────────
-───────────────────────────────────────────────────────────────────
-Add    Account.Location__c                     CustomField    force-app\main\def
-ault\objects\Account\fields\Location__c.field-meta.xml
-Add    Account-Account %28Marketing%29 Layout  Layout         force-app\main\def
-ault\layouts\Account-Account %28Marketing%29 Layout.layout-meta.xml
-Add    Account-Account %28Support%29 Layout    Layout         force-app\main\def
-ault\layouts\Account-Account %28Support%29 Layout.layout-meta.xml
-Add    Account-Account %28Sales%29 Layout      Layout         force-app\main\def
-ault\layouts\Account-Account %28Sales%29 Layout.layout-meta.xml
-Add    Account-Account Layout                  Layout         force-app\main\def
-ault\layouts\Account-Account Layout.layout-meta.xml
-Add    Geolocation                             PermissionSet  force-app\main\def
-ault\permissionsets\Geolocation.permissionset-meta.xml
+─────  ──────────────────────────────────────  ─────────────  ─────────────────────────────────────────────────────────────────────────────────────
+Add    Account.Location__c                     CustomField    force-app\main\default\objects\Account\fields\Location__c.field-meta.xml
+Add    Account-Account %28Marketing%29 Layout  Layout         force-app\main\default\layouts\Account-Account %28Marketing%29 Layout.layout-meta.xml
+Add    Account-Account %28Support%29 Layout    Layout         force-app\main\default\layouts\Account-Account %28Support%29 Layout.layout-meta.xml
+Add    Account-Account %28Sales%29 Layout      Layout         force-app\main\default\layouts\Account-Account %28Sales%29 Layout.layout-meta.xml
+Add    Account-Account Layout                  Layout         force-app\main\default\layouts\Account-Account Layout.layout-meta.xml
+Add    Geolocation                             PermissionSet  force-app\main\default\permissionsets\Geolocation.permissionset-meta.xml
 
 F:\Persdata\Dropbox\Trailhead DX\geolocation>
 
@@ -52,3 +44,203 @@ sfdx force:data:tree:export -q "SELECT Name, Location__Latitude__s, Location__Lo
 
 Push data to org import account
 sfdx force:data:tree:import --sobjecttreefiles data/Account.json
+
+create apex class
+sfdx force:apex:class:create -n AccountController -d force-app/main/default/classes
+
+push code to scratch org
+sfdx force:source:push
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:source:push
+=== Pushed Source
+STATE  FULL NAME          TYPE       PROJECT PATH
+─────  ─────────────────  ─────────  ─────────────────────────────────────────────────────────────
+Add    AccountController  ApexClass  force-app\main\default\classes\AccountController.cls
+Add    AccountController  ApexClass  force-app\main\default\classes\AccountController.cls-meta.xml
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>
+
+
+create a lightning vomponenet
+sfdx force:lightning:component:create -n AccountLocator -d force-app/main/default/aura
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:lightning:component:create -n AccountLocator -d force-app/main/default/aura
+target dir = F:\Persdata\Dropbox\Trailhead DX\geolocation\force-app\main\default\aura
+   create AccountLocator\AccountLocator.cmp
+   create AccountLocator\AccountLocator.cmp-meta.xml
+   create AccountLocator\AccountLocatorController.js
+   create AccountLocator\AccountLocatorHelper.js
+   create AccountLocator\AccountLocator.css
+   create AccountLocator\AccountLocatorRenderer.js
+   create AccountLocator\AccountLocator.svg
+   create AccountLocator\AccountLocator.auradoc
+   create AccountLocator\AccountLocator.design
+
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>
+
+
+copy some code
+push it in scratch org
+
+sfdx force:source:push
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:source:push
+=== Pushed Source
+STATE  FULL NAME                                   TYPE                  PROJECT PATH
+─────  ──────────────────────────────────────────  ────────────────────  ──────────────────────────────────────────────────────────────────────
+Add    AccountLocator\AccountLocator.auradoc       AuraDefinitionBundle  force-app\main\default\aura\AccountLocator\AccountLocator.auradoc
+Add    AccountLocator\AccountLocator.cmp           AuraDefinitionBundle  force-app\main\default\aura\AccountLocator\AccountLocator.cmp
+Add    AccountLocator\AccountLocator.cmp           AuraDefinitionBundle  force-app\main\default\aura\AccountLocator\AccountLocator.cmp-meta.xml
+Add    AccountLocator\AccountLocator.css           AuraDefinitionBundle  force-app\main\default\aura\AccountLocator\AccountLocator.css
+Add    AccountLocator\AccountLocator.design        AuraDefinitionBundle  force-app\main\default\aura\AccountLocator\AccountLocator.design
+Add    AccountLocator\AccountLocator.svg           AuraDefinitionBundle  force-app\main\default\aura\AccountLocator\AccountLocator.svg
+Add    AccountLocator\AccountLocatorController.js  AuraDefinitionBundle  force-app\main\default\aura\AccountLocator\AccountLocatorController.js
+Add    AccountLocator\AccountLocatorHelper.js      AuraDefinitionBundle  force-app\main\default\aura\AccountLocator\AccountLocatorHelper.js
+Add    AccountLocator\AccountLocatorRenderer.js    AuraDefinitionBundle  force-app\main\default\aura\AccountLocator\AccountLocatorRenderer.js
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>
+
+
+open scratch org
+sfdx force:org:open
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:org:open
+Access org 00D3E0000009VJoUAM as user test-o7ksgvznza2a@example.com with the following URL: https://platform-speed-9027-dev-ed.cs82.
+my.salesforce.com/secur/frontdoor.jsp?sid=00D3E0000009VJo!AQkAQFnxI9lgo5N9v2knXCy9kGTleyD1n4.lzyDScjPqwWTymM6xEOaghd8IHbbTQFRjW8XP9QCQ2QFDGyYYOGXYqtApSeUz
+
+sfdx force:source:pull
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:source:pull
+=== Pulled Source
+STATE  FULL NAME                    TYPE       PROJECT PATH
+─────  ───────────────────────────  ─────────  ────────────────────────────────────────────────────────────────────────────
+Add    Account_Locator              CustomTab  force-app\main\default\tabs\Account_Locator.tab-meta.xml
+Add    Admin                        Profile    force-app\main\default\profiles\Admin.profile-meta.xml
+Add    Custom%3A Sales Profile      Profile    force-app\main\default\profiles\Custom%3A Sales Profile.profile-meta.xml
+Add    Custom%3A Marketing Profile  Profile    force-app\main\default\profiles\Custom%3A Marketing Profile.profile-meta.xml
+Add    Custom%3A Support Profile    Profile    force-app\main\default\profiles\Custom%3A Support Profile.profile-meta.xml
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>
+
+
+sfdx force:lightning:component:create -n AccountListItem -d force-app/main/default/aura
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:lightning:component:create -n AccountListItem -d force-app/main/default/aura
+
+target dir = F:\Persdata\Dropbox\Trailhead DX\geolocation\force-app\main\default\aura
+   create AccountListItem\AccountListItem.cmp
+   create AccountListItem\AccountListItem.cmp-meta.xml
+   create AccountListItem\AccountListItemController.js
+   create AccountListItem\AccountListItemHelper.js
+   create AccountListItem\AccountListItem.css
+   create AccountListItem\AccountListItemRenderer.js
+   create AccountListItem\AccountListItem.svg
+   create AccountListItem\AccountListItem.auradoc
+   create AccountListItem\AccountListItem.design
+
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>
+sfdx force:lightning:component:create -n AccountList -d force-app/main/default/aura
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:lightning:component:create -n AccountList -d force-app/main/default/aura
+target dir = F:\Persdata\Dropbox\Trailhead DX\geolocation\force-app\main\default\aura
+   create AccountList\AccountList.cmp
+   create AccountList\AccountList.cmp-meta.xml
+   create AccountList\AccountListController.js
+   create AccountList\AccountListHelper.js
+   create AccountList\AccountList.css
+   create AccountList\AccountListRenderer.js
+   create AccountList\AccountList.svg
+   create AccountList\AccountList.auradoc
+   create AccountList\AccountList.design
+
+
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:source:push
+=== Pushed Source
+STATE    FULL NAME                                     TYPE                  PROJECT PATH
+───────  ────────────────────────────────────────────  ────────────────────  ────────────────────────────────────────────────────────────────────────
+Add      AccountList\AccountList.auradoc               AuraDefinitionBundle  force-app\main\default\aura\AccountList\AccountList.auradoc
+Add      AccountList\AccountList.cmp                   AuraDefinitionBundle  force-app\main\default\aura\AccountList\AccountList.cmp
+Add      AccountList\AccountList.cmp                   AuraDefinitionBundle  force-app\main\default\aura\AccountList\AccountList.cmp-meta.xml
+Add      AccountList\AccountList.css                   AuraDefinitionBundle  force-app\main\default\aura\AccountList\AccountList.css
+Add      AccountList\AccountList.design                AuraDefinitionBundle  force-app\main\default\aura\AccountList\AccountList.design
+Add      AccountList\AccountList.svg                   AuraDefinitionBundle  force-app\main\default\aura\AccountList\AccountList.svg
+Add      AccountList\AccountListController.js          AuraDefinitionBundle  force-app\main\default\aura\AccountList\AccountListController.js
+Add      AccountList\AccountListHelper.js              AuraDefinitionBundle  force-app\main\default\aura\AccountList\AccountListHelper.js
+Add      AccountList\AccountListRenderer.js            AuraDefinitionBundle  force-app\main\default\aura\AccountList\AccountListRenderer.js
+Add      AccountListItem\AccountListItem.auradoc       AuraDefinitionBundle  force-app\main\default\aura\AccountListItem\AccountListItem.auradoc
+Add      AccountListItem\AccountListItem.cmp           AuraDefinitionBundle  force-app\main\default\aura\AccountListItem\AccountListItem.cmp
+Add      AccountListItem\AccountListItem.cmp           AuraDefinitionBundle  force-app\main\default\aura\AccountListItem\AccountListItem.cmp-meta.xml
+Add      AccountListItem\AccountListItem.css           AuraDefinitionBundle  force-app\main\default\aura\AccountListItem\AccountListItem.css
+Add      AccountListItem\AccountListItem.design        AuraDefinitionBundle  force-app\main\default\aura\AccountListItem\AccountListItem.design
+Add      AccountListItem\AccountListItem.svg           AuraDefinitionBundle  force-app\main\default\aura\AccountListItem\AccountListItem.svg
+Add      AccountListItem\AccountListItemController.js  AuraDefinitionBundle  force-app\main\default\aura\AccountListItem\AccountListItemController.js
+Add      AccountListItem\AccountListItemHelper.js      AuraDefinitionBundle  force-app\main\default\aura\AccountListItem\AccountListItemHelper.js
+Add      AccountListItem\AccountListItemRenderer.js    AuraDefinitionBundle  force-app\main\default\aura\AccountListItem\AccountListItemRenderer.js
+Changed  AccountLocator\AccountLocator.cmp             AuraDefinitionBundle  force-app\main\default\aura\AccountLocator\AccountLocator.cmp
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation> add leaflet as static resource in scratch org
+sfdx force:source:pull
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:source:pull
+=== Pulled Source
+STATE    FULL NAME  TYPE            PROJECT PATH
+───────  ─────────  ──────────────  ────────────────────────────────────────────────────────────────
+Add      leaflet    StaticResource  force-app\main\default\staticresources\leaflet.resource-meta.xml
+Changed  leaflet    StaticResource  force-app\main\default\staticresources\leaflet.bin
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>
+
+create account map component
+sfdx force:lightning:component:create -n AccountMap -d force-app/main/default/aura
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:lightning:component:create -n AccountMap -d force-app/main/default/aura
+target dir = F:\Persdata\Dropbox\Trailhead DX\geolocation\force-app\main\default\aura
+   create AccountMap\AccountMap.cmp
+   create AccountMap\AccountMap.cmp-meta.xml
+   create AccountMap\AccountMapController.js
+   create AccountMap\AccountMapHelper.js
+   create AccountMap\AccountMap.css
+   create AccountMap\AccountMapRenderer.js
+   create AccountMap\AccountMap.svg
+   create AccountMap\AccountMap.auradoc
+   create AccountMap\AccountMap.design
+
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:source:push
+=== Pushed Source
+STATE    FULL NAME                           TYPE                  PROJECT PATH
+───────  ──────────────────────────────────  ────────────────────  ──────────────────────────────────────────────────────────────
+Add      AccountMap\AccountMap.auradoc       AuraDefinitionBundle  force-app\main\default\aura\AccountMap\AccountMap.auradoc
+Add      AccountMap\AccountMap.cmp           AuraDefinitionBundle  force-app\main\default\aura\AccountMap\AccountMap.cmp
+Add      AccountMap\AccountMap.cmp           AuraDefinitionBundle  force-app\main\default\aura\AccountMap\AccountMap.cmp-meta.xml
+Add      AccountMap\AccountMap.css           AuraDefinitionBundle  force-app\main\default\aura\AccountMap\AccountMap.css
+Add      AccountMap\AccountMap.design        AuraDefinitionBundle  force-app\main\default\aura\AccountMap\AccountMap.design
+Add      AccountMap\AccountMap.svg           AuraDefinitionBundle  force-app\main\default\aura\AccountMap\AccountMap.svg
+Add      AccountMap\AccountMapController.js  AuraDefinitionBundle  force-app\main\default\aura\AccountMap\AccountMapController.js
+Add      AccountMap\AccountMapHelper.js      AuraDefinitionBundle  force-app\main\default\aura\AccountMap\AccountMapHelper.js
+Add      AccountMap\AccountMapRenderer.js    AuraDefinitionBundle  force-app\main\default\aura\AccountMap\AccountMapRenderer.js
+Changed  AccountLocator\AccountLocator.cmp   AuraDefinitionBundle  force-app\main\default\aura\AccountLocator\AccountLocator.cmp
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>
+
+Create a lightning event 
+
+sfdx force:lightning:event:create -n AccountsLoaded -d force-app/main/default/aura
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:lightning:event:create -n AccountsLoaded -d force-app/main/default/aura
+target dir = F:\Persdata\Dropbox\Trailhead DX\geolocation\force-app\main\default\aura
+   create AccountsLoaded\AccountsLoaded.evt
+   create AccountsLoaded\AccountsLoaded.evt-meta.xml
+
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>
+
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>sfdx force:source:push
+=== Pushed Source
+STATE    FULL NAME                             TYPE                  PROJECT PATH
+───────  ────────────────────────────────────  ────────────────────  ───────────────────────────────────────────────────────────────────
+Add      AccountsLoaded\AccountsLoaded.evt     AuraDefinitionBundle  force-app\main\default\aura\AccountsLoaded\AccountsLoaded.evt
+Add      AccountsLoaded\AccountsLoaded.evt     AuraDefinitionBundle  force-app\main\default\aura\AccountsLoaded\AccountsLoaded.evt-meta.xml
+Changed  AccountList\AccountList.cmp           AuraDefinitionBundle  force-app\main\default\aura\AccountList\AccountList.cmp
+Changed  AccountList\AccountListController.js  AuraDefinitionBundle  force-app\main\default\aura\AccountList\AccountListController.js
+Changed  AccountMap\AccountMap.cmp             AuraDefinitionBundle  force-app\main\default\aura\AccountMap\AccountMap.cmp
+Changed  AccountMap\AccountMapController.js    AuraDefinitionBundle  force-app\main\default\aura\AccountMap\AccountMapController.js
+
+F:\Persdata\Dropbox\Trailhead DX\geolocation>
+
